@@ -1,22 +1,18 @@
-name: Tableau Workbook Workflows Staging
+name: Store readme in Drive
 on:
-  pull_request:
-      branches:
-        - master
+  push: { branches: [master] }
 jobs:
-  tableau-validation-action:
-    name: Tableau Workbook Staging Publisher
+  buildAndTestForSomePlatforms:
+    name: Upload readme to drive
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: 'Tableau Workbook Action' 
-        uses: jayamanikharyono/tableau-workbook-action@v1.4
-        env:
-          USERNAME: ${{ secrets.USERNAME }}
-          PASSWORD: ${{ secrets.PASSWORD }}
-          SITE_ID: ${{ secrets.SITE_ID }}
-          TABLEAU_URL: ${{ secrets.TABLEAU_URL }}
+      # Checkout
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      # Upload to Drive
+      - name: Upload README.md to Google Drive
+        uses: Jodebu/upload-to-drive@master
         with:
-          workbook_dir: tests/workbooks
-          env: staging
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          target: README.md
+          credentials: secrets.GSA
+          folder: 1xScZ2Kqo9mdSHYrolgywwqwU9FNGIuFj
