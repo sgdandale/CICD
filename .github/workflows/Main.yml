@@ -14,5 +14,5 @@ jobs:
         uses: Jodebu/upload-to-drive@master
         with:
           target: README.md
-          credentials: secrets.GSA
-          folder: 1xScZ2Kqo9mdSHYrolgywwqwU9FNGIuFj
+           credentials:${{ secrets.GSA }}
+            folderId:${{ secrets.folderId }}
